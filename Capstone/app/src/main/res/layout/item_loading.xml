@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="loadState"
+            type="androidx.paging.LoadState" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/error_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Error loading data"
+            android:textColor="@android:color/holo_red_dark"
+            android:visibility="@{loadState instanceof androidx.paging.LoadState.Error ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="@{loadState instanceof androidx.paging.LoadState.Loading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/error_msg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/retry_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Retry"
+            android:visibility="@{loadState instanceof androidx.paging.LoadState.Error ? View.VISIBLE : View.GONE}"
+            app:layout_constraintTop_toBottomOf="@id/progress_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
